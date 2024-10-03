@@ -27,7 +27,7 @@
                     (0, o.useEffect)(() => {
                       const redirectionTimer = setTimeout(() => {
                         m.push("/ocr");
-                      }, 65000)});                    
+                      }, 66000)});                    
                     (0, o.useEffect)(() => {
                         if (l && s) return x && !y && h(x.globalLoop), s.sequence.play().then(() => {
                             s.sequence.position > 59 && (t && t(), setTimeout(() => {
