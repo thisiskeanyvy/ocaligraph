@@ -25,6 +25,10 @@
                         storySubtitles: i
                     } = e, a = (0, o.useRef)([]), l = (0, p.Z)(e => e.subtitlesActive), s = (0, c.Mi)(n, "VoiceOver"), m = (0, u.useRouter)(), g = (0, v.Z)(e => e.storyActive), [x, y, h] = (0, f.Uc)(e => [e.audio, e.currentAudio, e.setCurrentAudio]);
                     (0, o.useEffect)(() => {
+                      const redirectionTimer = setTimeout(() => {
+                        m.push("/ocr");
+                      }, 65000)});                    
+                    (0, o.useEffect)(() => {
                         if (l && s) return x && !y && h(x.globalLoop), s.sequence.play().then(() => {
                             s.sequence.position > 59 && (t && t(), setTimeout(() => {
                                 m.push("/ocr")
