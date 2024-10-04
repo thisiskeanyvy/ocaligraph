@@ -20,5 +20,5 @@ function consoleBanner() {
 	}
 }
 
-//getDomain()
+getDomain()
 consoleBanner()
