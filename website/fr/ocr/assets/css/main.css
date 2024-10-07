@@ -2055,6 +2055,10 @@ a .kash * {
   height: 100px;
 }
 
+.margin-about {
+  margin-left: 18px !important;
+}
+
 @media screen and (max-width: 768px) {
   .logo-ocr {
     width: 50px !important;
@@ -2064,6 +2068,9 @@ a .kash * {
   .tel-button {
     margin-left: 128px !important;
     margin-top: -4px !important;
+  }
+  .margin-about {
+    margin-left: 0px !important;
   }
 }
 

@@ -35,6 +35,11 @@
     <script>
       window.slug = "about";
     </script>
+    <style>
+      html, body {
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
     <div class="wrap about">
@@ -64,16 +69,21 @@
         <div class="nav-backdrop"></div>
       </nav>
       <main class="wrap--content">
-        <br>
-        <div class="gui gui-expert drg">
-          <input id="asciiLetters" type="text" value=" 0+X#"></input>
-        </div>
-        <a target='_blank' href=''>Prochainement disponible</a>
-        <div class='about-ascii'></div>
+        <br><br><br>
+<div id="13416aff-e22e-444a-9caa-ac0f99573ee6" class="block block-type-heading margin-about">
+  <h2>Dans le cadre de notre projet de logiciel OCR (Optical Character Recognition). <br><br> Les membres du projet OCaligraph sont : <br><br>- Gaetan Suillerot <br>- Keany Vy Khun <br>- Theo Brulier <br>- Nathan Gillotin. <br><br><br> Ensemble, nous travaillons à développer une solution avancée de reconnaissance<br>optique de caractères qui sera dédiée à la recherche scientifique. <br><br><br> Le tout, visant à améliorer l'accessibilité et l'analyse des documents.</h2>
+</div>
+<br>
+
+
+<div class='about-ascii'></div>
+
       </main>
       <div id="container"></div>
-      <div id="ascii-shaders">
-        <script id="asc-frag1" type="x-shader/x-fragment"> // based on https://www.shadertoy.com/view/lsBXzD
+
+<div id="ascii-shaders">
+  <script id="asc-frag1" type="x-shader/x-fragment">
+  // based on https://www.shadertoy.com/view/lsBXzD
   // which is nowadays a pixi.js ascii filter https://filters.pixijs.download/main/docs/PIXI.filters.AsciiFilter.html
   
   precision highp float;
@@ -140,7 +150,8 @@
       }
   }
   </script>
-        <script id="asc-general" type="x-shader/x-vertex"> attribute vec2 pos;
+  <script id="asc-general" type="x-shader/x-vertex">
+      attribute vec2 pos;
       uniform vec2 resolution;
       
       void main() {
@@ -148,10 +159,11 @@
           gl_Position = projectionMatrix * mvPosition;
       }
   </script>
-      </div>
-      <div id="menu-shaders">
-        <script id="heightmapFragmentShader" type="x-shader/x-fragment"> #include 
-                          <common>
+</div>
+
+<div id="menu-shaders">
+  <script id="heightmapFragmentShader" type="x-shader/x-fragment">
+  #include <common>
   uniform vec2 mousePos;
   uniform float mouseSize;
   uniform float viscosityConstant;
@@ -177,9 +189,9 @@
     gl_FragColor = heightmapValue;
     // gl_FragColor += heightmapValue * 0.95;
   }
-  
-                          </script>
-        <script id="smoothFragmentShader" type="x-shader/x-fragment"> uniform sampler2D texture;
+  </script>
+  <script id="smoothFragmentShader" type="x-shader/x-fragment">
+  uniform sampler2D texture;
   void main() {
     vec2 cellSize = 1.0 / resolution.xy;
     vec2 uv = gl_FragCoord.xy * cellSize;
@@ -193,7 +205,8 @@
     gl_FragColor = textureValue;
   }
   </script>
-        <script id="readWaterLevelFragmentShader" type="x-shader/x-fragment"> uniform vec2 point1;
+  <script id="readWaterLevelFragmentShader" type="x-shader/x-fragment">
+  uniform vec2 point1;
   uniform sampler2D texture;
   float shift_right( float v, float amt ) {
     v = floor( v ) + 0.5;
@@ -241,145 +254,102 @@
         gl_FragColor = encode_float( 0.0 );
       }
     }
-    
-                          </script>
-        <script id="waterVertexShader" type="x-shader/x-vertex"> uniform sampler2D heightmap;
+    </script>
+    <script id="waterVertexShader" type="x-shader/x-vertex">
+    uniform sampler2D heightmap;
     #define PHONG
     varying vec3 vViewPosition;
     #ifndef FLAT_SHADED
     varying vec3 vNormal;
     #endif
-    #include 
-                            <common>
-    #include 
-                              <uv_pars_vertex>
-    #include 
-                                <uv2_pars_vertex>
-    #include 
-                                  <displacementmap_pars_vertex>
-    #include 
-                                    <envmap_pars_vertex>
-    #include 
-                                      <color_pars_vertex>
-    #include 
-                                        <morphtarget_pars_vertex>
-    #include 
-                                          <skinning_pars_vertex>
-    #include 
-                                            <shadowmap_pars_vertex>
-    #include 
-                                              <logdepthbuf_pars_vertex>
-    #include 
-                                                <clipping_planes_pars_vertex>
+    #include <common>
+    #include <uv_pars_vertex>
+    #include <uv2_pars_vertex>
+    #include <displacementmap_pars_vertex>
+    #include <envmap_pars_vertex>
+    #include <color_pars_vertex>
+    #include <morphtarget_pars_vertex>
+    #include <skinning_pars_vertex>
+    #include <shadowmap_pars_vertex>
+    #include <logdepthbuf_pars_vertex>
+    #include <clipping_planes_pars_vertex>
     void main() {
       vec2 cellSize = vec2( 1.0 / WIDTH, 1.0 / WIDTH );
-      #include 
-                                                  <uv_vertex>
-      #include 
-                                                    <uv2_vertex>
-      #include 
-                                                      <color_vertex>
-      // # include 
-                                                        <beginnormal_vertex>
+      #include <uv_vertex>
+      #include <uv2_vertex>
+      #include <color_vertex>
+      // # include <beginnormal_vertex>
       // Compute normal from heightmap
       vec3 objectNormal = vec3(
         ( texture2D( heightmap, uv + vec2( - cellSize.x, 0 ) ).x - texture2D( heightmap, uv + vec2( cellSize.x, 0 ) ).x ) * WIDTH / BOUNDS,
         ( texture2D( heightmap, uv + vec2( 0, - cellSize.y ) ).x - texture2D( heightmap, uv + vec2( 0, cellSize.y ) ).x ) * WIDTH / BOUNDS,
         1.0 );
-        //
-                                                          <beginnormal_vertex>
-        #include 
-                                                            <morphnormal_vertex>
-        #include 
-                                                              <skinbase_vertex>
-        #include 
-                                                                <skinnormal_vertex>
-        #include 
-                                                                  <defaultnormal_vertex>
+        //<beginnormal_vertex>
+        #include <morphnormal_vertex>
+        #include <skinbase_vertex>
+        #include <skinnormal_vertex>
+        #include <defaultnormal_vertex>
         #ifndef FLAT_SHADED // Normal computed with derivatives when FLAT_SHADED
         vNormal = normalize( transformedNormal );
         #endif
-        //# include 
-                                                                    <begin_vertex>
+        //# include <begin_vertex>
         float heightValue = texture2D( heightmap, uv ).x;
         vec3 transformed = vec3( position.x, position.y, heightValue );
-        //
-                                                                      <begin_vertex>
-        #include 
-                                                                        <morphtarget_vertex>
-        #include 
-                                                                          <skinning_vertex>
-        #include 
-                                                                            <displacementmap_vertex>
-        #include 
-                                                                              <project_vertex>
-        #include 
-                                                                                <logdepthbuf_vertex>
-        #include 
-                                                                                  <clipping_planes_vertex>
+        //<begin_vertex>
+        #include <morphtarget_vertex>
+        #include <skinning_vertex>
+        #include <displacementmap_vertex>
+        #include <project_vertex>
+        #include <logdepthbuf_vertex>
+        #include <clipping_planes_vertex>
         vViewPosition = - mvPosition.xyz;
-        #include 
-                                                                                    <worldpos_vertex>
-        #include 
-                                                                                      <envmap_vertex>
-        #include 
-                                                                                        <shadowmap_vertex>
+        #include <worldpos_vertex>
+        #include <envmap_vertex>
+        #include <shadowmap_vertex>
       }
-      
-                                                                                        </script>
-        <script id="waterVertexDots" type="x-shader/x-vertex"> uniform sampler2D heightmap;
+      </script>
+
+
+
+
+
+
+
+      <script id="waterVertexDots" type="x-shader/x-vertex">
+      uniform sampler2D heightmap;
       uniform float size;
       uniform float scale;
       varying vec3 vViewPosition;
       #ifndef FLAT_SHADED
       varying vec3 vNormal;
       #endif
-      #include 
-                                                                                          <common>
-      #include 
-                                                                                            <uv_pars_vertex>
-      #include 
-                                                                                              <uv2_pars_vertex>
-      #include 
-                                                                                                <displacementmap_pars_vertex>
-      #include 
-                                                                                                  <envmap_pars_vertex>
-      #include 
-                                                                                                    <color_pars_vertex>
-      #include 
-                                                                                                      <morphtarget_pars_vertex>
-      #include 
-                                                                                                        <skinning_pars_vertex>
-      #include 
-                                                                                                          <shadowmap_pars_vertex>
-      #include 
-                                                                                                            <logdepthbuf_pars_vertex>
-      #include 
-                                                                                                              <clipping_planes_pars_vertex>
+      #include <common>
+      #include <uv_pars_vertex>
+      #include <uv2_pars_vertex>
+      #include <displacementmap_pars_vertex>
+      #include <envmap_pars_vertex>
+      #include <color_pars_vertex>
+      #include <morphtarget_pars_vertex>
+      #include <skinning_pars_vertex>
+      #include <shadowmap_pars_vertex>
+      #include <logdepthbuf_pars_vertex>
+      #include <clipping_planes_pars_vertex>
       void main() {
         vec2 cellSize = vec2( 2.0 / WIDTH, 2.0 / WIDTH );
-        #include 
-                                                                                                                <uv_vertex>
-        #include 
-                                                                                                                  <uv2_vertex>
-        #include 
-                                                                                                                    <color_vertex>
-        // # include 
-                                                                                                                      <beginnormal_vertex>
+        #include <uv_vertex>
+        #include <uv2_vertex>
+        #include <color_vertex>
+        // # include <beginnormal_vertex>
         // Compute normal from heightmap
         vec3 objectNormal = vec3(
           ( texture2D( heightmap, uv + vec2( - cellSize.x, 0 ) ).x - texture2D( heightmap, uv + vec2( cellSize.x, 0 ) ).x ) * WIDTH / BOUNDS,
           ( texture2D( heightmap, uv + vec2( 0, - cellSize.y ) ).x - texture2D( heightmap, uv + vec2( 0, cellSize.y ) ).x ) * WIDTH / BOUNDS,
           1.0 );
 
-          #include 
-                                                                                                                        <morphnormal_vertex>
-          #include 
-                                                                                                                          <skinbase_vertex>
-          #include 
-                                                                                                                            <skinnormal_vertex>
-          #include 
-                                                                                                                              <defaultnormal_vertex>
+          #include <morphnormal_vertex>
+          #include <skinbase_vertex>
+          #include <skinnormal_vertex>
+          #include <defaultnormal_vertex>
           #ifndef FLAT_SHADED // Normal computed with derivatives when FLAT_SHADED
           vNormal = normalize( transformedNormal );
           #endif
@@ -389,74 +359,54 @@
           float heightValue = texture2D( heightmap, uv ).x;
           vec3 transformed = vec3( position.x, position.y, heightValue * 20.0 );
           // vec3 transformed = vec3( position.x, position.y, max(0.0, heightValue * 5.0) );
-          //
-                                                                                                                                <begin_vertex>
-          #include 
-                                                                                                                                  <morphtarget_vertex>
-          #include 
-                                                                                                                                    <skinning_vertex>
-          #include 
-                                                                                                                                      <displacementmap_vertex>
-          #include 
-                                                                                                                                        <project_vertex>
-          #include 
-                                                                                                                                          <logdepthbuf_vertex>
-          #include 
-                                                                                                                                            <clipping_planes_vertex>
+          //<begin_vertex>
+          #include <morphtarget_vertex>
+          #include <skinning_vertex>
+          #include <displacementmap_vertex>
+          #include <project_vertex>
+          #include <logdepthbuf_vertex>
+          #include <clipping_planes_vertex>
           vViewPosition = - mvPosition.xyz;
-          #include 
-                                                                                                                                              <worldpos_vertex>
-          #include 
-                                                                                                                                                <envmap_vertex>
-          #include 
-                                                                                                                                                  <shadowmap_vertex>
+          #include <worldpos_vertex>
+          #include <envmap_vertex>
+          #include <shadowmap_vertex>
         }
-        
-                                                                                                                                                  </script>
-        <script id="waterVertexDotsFrag" type="x-shader/x-vertex"> uniform vec3 diffuse;
+        </script>
+
+
+
+
+
+        <script id="waterVertexDotsFrag" type="x-shader/x-vertex">
+        uniform vec3 diffuse;
         uniform float opacity;
-        #include 
-                                                                                                                                                    <common>
-        #include 
-                                                                                                                                                      <color_pars_fragment>
-        #include 
-                                                                                                                                                        <map_particle_pars_fragment>
-        #include 
-                                                                                                                                                          <alphatest_pars_fragment>
-        #include 
-                                                                                                                                                            <fog_pars_fragment>
-        #include 
-                                                                                                                                                              <logdepthbuf_pars_fragment>
-        #include 
-                                                                                                                                                                <clipping_planes_pars_fragment>
+        #include <common>
+        #include <color_pars_fragment>
+        #include <map_particle_pars_fragment>
+        #include <alphatest_pars_fragment>
+        #include <fog_pars_fragment>
+        #include <logdepthbuf_pars_fragment>
+        #include <clipping_planes_pars_fragment>
         void main() {
-          #include 
-                                                                                                                                                                  <clipping_planes_fragment>
+          #include <clipping_planes_fragment>
           vec3 outgoingLight = vec3( 0.0 );
           vec4 diffuseColor = vec4( diffuse, opacity );
-          #include 
-                                                                                                                                                                    <logdepthbuf_fragment>
-          #include 
-                                                                                                                                                                      <map_particle_fragment>
-          #include 
-                                                                                                                                                                        <color_fragment>
-          #include 
-                                                                                                                                                                          <alphatest_fragment>
+          #include <logdepthbuf_fragment>
+          #include <map_particle_fragment>
+          #include <color_fragment>
+          #include <alphatest_fragment>
           outgoingLight = diffuseColor.rgb;
-          #include 
-                                                                                                                                                                            <output_fragment>
-          #include 
-                                                                                                                                                                              <tonemapping_fragment>
-          #include 
-                                                                                                                                                                                <encodings_fragment>
-          #include 
-                                                                                                                                                                                  <fog_fragment>
-          #include 
-                                                                                                                                                                                    <premultiplied_alpha_fragment>
+          #include <output_fragment>
+          #include <tonemapping_fragment>
+          #include <encodings_fragment>
+          #include <fog_fragment>
+          #include <premultiplied_alpha_fragment>
         }
-        
-                                                                                                                                                                                    </script>
-        <script type="x-shader/x-vertex" id="vertexshader"> varying vec2 vUv;
+        </script>
+
+        <script type="x-shader/x-vertex" id="vertexshader">
+
+        varying vec2 vUv;
 
         void main() {
 
@@ -467,7 +417,10 @@
         }
 
         </script>
-        <script type="x-shader/x-fragment" id="fragmentshader"> uniform sampler2D baseTexture;
+
+        <script type="x-shader/x-fragment" id="fragmentshader">
+
+        uniform sampler2D baseTexture;
         uniform sampler2D bloomTexture;
 
         varying vec2 vUv;
