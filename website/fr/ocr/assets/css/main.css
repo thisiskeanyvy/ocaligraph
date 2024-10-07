@@ -202,7 +202,7 @@ body a {
 }
 
 .nav--brand {
-  background-color: #000;
+  background-color: transparent;
   padding: 1px;
   margin-right: auto;
 }

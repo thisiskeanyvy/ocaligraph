@@ -3,5 +3,13 @@
     <url>
       <loc>https://www.ocaligraph.com/</loc>
       <lastmod>2024-10-05T09:30:55+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1.0000</priority>
+    </url>
+    <url>
+      <loc>https://www.ocaligraph.com/fr/ocr/team</loc>
+      <lastmod>2024-10-07T19:47:02+00:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.8000</priority>
     </url>
 </urlset>
