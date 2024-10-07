@@ -36,37 +36,46 @@
     <script>
       window.slug = "home";
     </script>
+    <style>
+    .disable-select {
+        user-select: none; /* supported by Chrome and Opera */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+    }
+    </style>
   </head>
   <body>
     <div class="wrap home">
       <nav class="nav">
-        <div class="nav--brand nav-item">
+        <div class="nav--brand nav-item disable-select">
           <a href="/">
             <img class="logo-ocr" style="width: 100px; margin-left: 60px; height: 100px;" src="assets/img/logo-w.png">
           </a>
         </div>
         <div class="nav--main">
           <a class="nav-item drg team" href="javascript:void(0);">
-            <span class="kash ktxt kwidth tel-button" data-ite="30"> L'équipe </span>
+            <span style="cursor: pointer !important;"  class="kash ktxt kwidth tel-button disable-select" data-ite="30"> L'équipe </span>
           </a>
           <a href="javascript:void(0);" class="nav-item menu-but drg">
-            <span class="kash ktxt kwidth" data-ite="30"> Menu </span>
+            <span style="cursor: pointer !important;" class="kash ktxt kwidth disable-select" data-ite="30"> Menu </span>
           </a>
           <a class="nav-item drg roadmap tablet" href="javascript:void(0);">
-            <span class="kash ktxt kwidth" data-ite="30"> Roadmap </span>
+            <span style="cursor: pointer !important;" class="kash ktxt kwidth disable-select" data-ite="30"> Roadmap </span>
           </a>
           <a class="nav-item drg documentation" href="javascript:void(0);">
-            <span class="kash ktxt kwidth" data-ite="30"> Documentation </span>
+            <span stle="cursor: pointer !important;" class="kash ktxt kwidth disable-select" data-ite="30"> Documentation </span>
           </a>
           <a class="nav-item drg download documentation" href="javascript:void(0);">
-            <span class="kash ktxt kwidth" data-ite="30"> Télécharger </span>
+            <span style="cursor: pointer !important;" class="kash ktxt kwidth disable-select" data-ite="30"> Télécharger </span>
           </a>
         </div>
         <div class="nav-backdrop"></div>
       </nav>
       <main class="wrap--content">
         <div class="tid">
-          <div class="tid--tick"></div>
+          <div class="tid--tick disable-select"></div>
           <div class="tid--location">OCaligraph [0CR]</div>
         </div>
         <div class="home">
