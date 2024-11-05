@@ -181,7 +181,7 @@ void find_word(const char* word) {
 	printf("Not found\n");
 }
 
-int main(int argc, char* argv[]) {
+int solver(int argc, char* argv[]) {
 
 	if (argc != 3) {
 		printf("USAGE : ./solver FILE WORD\n");
