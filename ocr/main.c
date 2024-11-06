@@ -5,6 +5,7 @@
 //include local
 // #include "rotation/rotation.c" //SDL Import
 //#include "pretreatment/pretreatment.c" //SDL Import
+#include "train/train.c"
 #include "solver/solver.c"
 //#include "detection/detection.c"
 
@@ -15,14 +16,16 @@ void help() {
        "  --solver; -s FILE WORD: Use the solver to find a word\n"
        "  --pretreatment; -p IMAGE: Use the pretreatment on a image\n"
        "  --rotation; -r IMAGE ANGLE: Use the rotation on a image\n"
-       "  --detection; -d <input image> [-v]: Use the detection\n"
+       "  --detection; -d <input image> [-v]: Use the detection on a image\n"
+       "  --train; -t <input image> [-v]: Use the neural network to train\n"
        "MISC:\n"
        "  --help; -h: Print this help summary page.\n"
        "EXAMPLES:\n"
        "  ./ocaligraph -s solver/grid HORIZONTAL\n"
        "  ./ocaligraph --pretreatment IMAGE\n"
        "  ./ocaligraph --rotation IMAGE ANGLE\n"
-       "  ./ocaligraph -d <input image> [-v]"
+       "  ./ocaligraph -d <input image> [-v]\n"
+       "  ./ocaligraph --train\n"
        "SEE THE MAN PAGE (https://ocaligraph.com/fr/ocr/man) FOR MORE OPTIONS AND EXAMPLES\n");
 }
 
@@ -54,7 +57,12 @@ int main(int argc, char* argv[]) {
 								help(); // temporaire
 								exit(0);
 							} else {
-								printf("ocaligraph: unrecognized option '%s'\nSee the output of ocaligraph -h for a summary of options.\n",argv[1]);
+								if(strcmp(argv[i],"--train") == 0 || strcmp(argv[i],"-t") == 0) {
+									train();
+									exit(0);
+								} else {
+									printf("ocaligraph: unrecognized option '%s'\nSee the output of ocaligraph -h for a summary of options.\n",argv[1]);
+								}
 							}
 						}
 					}

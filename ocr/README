@@ -2,5 +2,8 @@ On utilise un style de programmation modulaire.
 
 Structure de l'OCR :
 -> Main.c (Programme principal)
--> PictureRead.c (Lecture des lettres)
--> LetterFinder.c (Lecture des mots trouvés)
+-> detection (Contient le code de la détection)
+-> pretreatment (Contient le code du prétraitement)
+-> rotation (Contient le code de la rotation)
+-> solver (Contient le code du solver)
+-> train (Contient le code du réseaux de neurones)
